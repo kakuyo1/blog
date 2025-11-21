@@ -339,16 +339,17 @@ img {
     margin-bottom: 4px;
 }
 
-/* 底部：半透明白条 */
+/* 底部：完全透明背景，只显示文字和背景图片 */
 .site-footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    background: transparent;  /* 设置背景完全透明 */
     padding: 12px 0;
     font-size: 12px;
-    color: #444444;
-    background: rgba(255, 255, 255, 0.9);
+    color: #f5f5f5; /* 确保文字颜色能与背景区分开 */
     text-align: center;
+    backdrop-filter: blur(10px); /* 让底部有模糊效果，增强视觉效果 */
 }
 
+/* 使底部内容居中 */
 .site-footer .container {
     display: flex;
     justify-content: center;
@@ -486,4 +487,47 @@ img {
 .sidebar section:hover {
     transform: translateY(-2px);
     box-shadow: 0 22px 50px rgba(0, 0, 0, 0.55);
+}
+
+/* 图标样式 */
+.nav-icon {
+    width: 18px;           /* 调整图标的大小 */
+    height: 18px;
+    margin-right: 8px;      /* 图标和文字之间的间距 */
+    vertical-align: middle; /* 使图标垂直居中 */
+    transition: transform 0.2s ease;
+}
+
+/* 鼠标悬停时放大图标 */
+.main-nav a:hover .nav-icon {
+    transform: scale(1.1);
+}
+
+.main-nav a {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 16px;
+    font-size: 14px;
+    color: #444444;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.main-nav a:hover {
+    color: #111111;
+    opacity: 0.8;
+}
+
+/* logo 部分设置为 Flexbox 布局 */
+.logo {
+    display: flex;
+    align-items: center;  /* 水平垂直居中对齐 */
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* 调整图标的大小和位置 */
+.logo-icon {
+    width: 48px;         /* 图标大小 */
+    height: 48px;
+    margin-right: 8px;    /* 图标和文字之间的间距 */
 }
