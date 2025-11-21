@@ -1,46 +1,8 @@
 // script.js
-"use strict";
+"use strict"; // 启用严格模式, 以避免一些常见错误, 例如未声明变量，禁止使用保留字等
 
-// 简单的文章数据，你可以根据需要自行增删改内容
-const posts = [
-    {
-        id: 1,
-        title: "搭建我的第一个个人博客",
-        date: "2025-11-10",
-        category: "tech",
-        categoryName: "技术",
-        excerpt: "记录一下从零开始搭建这个简单博客的过程。",
-        content: `
-            <p>这是一个示例文章，用来展示博客的基本布局和功能。</p>
-            <p>目前整个项目只有三个文件：index.html、style.css 和 script.js。</p>
-            <p>你可以在 <code>script.js</code> 中修改文章内容，也可以改成从后端获取数据。</p>
-        `
-    },
-    {
-        id: 2,
-        title: "安静的一天",
-        date: "2025-10-12",
-        category: "life",
-        categoryName: "生活",
-        excerpt: "忙碌的日子里，偶尔也需要一段安静的时间。",
-        content: `
-            <p>今天没有发生什么特别的事情，只是平静的一天。</p>
-            <p>有时候，平淡本身就是一种幸福。</p>
-        `
-    },
-    {
-        id: 3,
-        title: "写博客对自己的意义",
-        date: "2025-09-15",
-        category: "note",
-        categoryName: "随笔",
-        excerpt: "为什么要写博客？其实是写给未来的自己看。",
-        content: `
-            <p>写博客的过程，也是和自己对话的过程。</p>
-            <p>当过一段时间再回来看这些文字，或许会有不一样的感受。</p>
-        `
-    }
-];
+// 文章数据：从 posts.json 异步加载
+let posts = [];
 
 // 用于存储每篇文章的留言（仅保存在前端内存中）
 const commentsStore = {}; // key: postId, value: [{name, text, time}, ...]
@@ -69,6 +31,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const mailBtn = document.getElementById("mailBtn");
 
     let currentPostId = null;
+
+    /* ========== 从 posts.json 加载文章数据 ========== */
+    function loadPosts() {
+        fetch("posts.json")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("网络错误：" + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                posts = data;
+                renderPostList();
+                renderArchive();
+            })
+            .catch(err => {
+                console.error("加载文章失败：", err);
+                postListEl.innerHTML =
+                    "<p style='color:#ffb3b3;font-size:14px;'>文章加载失败，请稍后重试。</p>";
+            });
+    }
 
     // 渲染文章列表
     function renderPostList() {
@@ -449,7 +432,6 @@ document.addEventListener("DOMContentLoaded", () => {
         createFirework(e.clientX, e.clientY);
     });
 
-    // 初始化
-    renderPostList();
-    renderArchive();
+    // 从 posts.json 加载文章
+    loadPosts();
 });
