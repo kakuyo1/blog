@@ -361,6 +361,94 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+        /* ================== 点击烟花特效 ================== */
+    // 创建覆盖全屏的 canvas
+    const fwCanvas = document.createElement("canvas");
+    fwCanvas.id = "fireworksCanvas";
+    Object.assign(fwCanvas.style, {
+        position: "fixed",
+        left: "0",
+        top: "0",
+        width: "100%",
+        height: "100%",
+        pointerEvents: "none", // 不影响页面原有点击
+        zIndex: "999"
+    });
+    document.body.appendChild(fwCanvas);
+
+    const fwCtx = fwCanvas.getContext("2d");
+
+    function resizeFwCanvas() {
+        fwCanvas.width = window.innerWidth;
+        fwCanvas.height = window.innerHeight;
+    }
+    resizeFwCanvas();
+    window.addEventListener("resize", resizeFwCanvas);
+
+    // 粒子数组
+    const particles = [];
+
+    // 创建一朵烟花
+    function createFirework(x, y) {
+        const count = 45; // 粒子数量，自己可以调
+        for (let i = 0; i < count; i++) {
+            const angle = (Math.PI * 2 * i) / count;
+            const speed = 2 + Math.random() * 2;
+            particles.push({
+                x,
+                y,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                alpha: 1,
+                radius: 2 + Math.random() * 1.5,
+                decay: 0.015 + Math.random() * 0.02,
+                hue: 200 + Math.random() * 80 // 偏冷色一点，不会太花
+            });
+        }
+    }
+
+    // 动画循环
+    function animateFireworks() {
+        // 轻微擦除，形成拖尾效果
+        fwCtx.globalCompositeOperation = "destination-out";
+        fwCtx.fillStyle = "rgba(0, 0, 0, 0.2)";
+        fwCtx.fillRect(0, 0, fwCanvas.width, fwCanvas.height);
+
+        fwCtx.globalCompositeOperation = "lighter";
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+
+            // 速度和位置更新
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.03; // 模拟重力
+            p.alpha -= p.decay;
+
+            // 消失就移除
+            if (p.alpha <= 0) {
+                particles.splice(i, 1);
+                continue;
+            }
+
+            fwCtx.save();
+            fwCtx.globalAlpha = p.alpha;
+            fwCtx.fillStyle = `hsl(${p.hue}, 80%, 60%)`;
+            fwCtx.beginPath();
+            fwCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            fwCtx.fill();
+            fwCtx.restore();
+        }
+
+        requestAnimationFrame(animateFireworks);
+    }
+    animateFireworks();
+
+    // 页面任意位置点击触发烟花
+    document.addEventListener("click", (e) => {
+        createFirework(e.clientX, e.clientY);
+    });
+
     // 初始化
     renderPostList();
     renderArchive();
