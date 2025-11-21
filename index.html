@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>个人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">我的个人博客</div>
+            <nav class="main-nav">
+                <a href="#home">首页</a>
+                <a href="#about">关于我</a>
+                <a href="#archive">归档</a>
+                <a href="#contact">联系</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main container" id="home">
+        <!-- 顶部简介 -->
+        <section class="hero">
+            <h1>你好，我是叶萌</h1>
+            <p>这里是我的个人博客，用来记录学习日常。</p>
+        </section>
+
+        <section class="blog-layout">
+            <!-- 左侧内容区 -->
+            <div class="content">
+                <!-- 工具栏：搜索 + 分类筛选 -->
+                <div class="toolbar">
+                    <input type="search" id="searchInput" placeholder="搜索文章标题或内容..." aria-label="搜索文章">
+                    <select id="categoryFilter" aria-label="按分类筛选文章">
+                        <option value="all">全部分类</option>
+                        <option value="tech">技术</option>
+                        <option value="life">生活</option>
+                        <option value="note">随笔</option>
+                    </select>
+                </div>
+
+                <!-- 文章列表（由 JS 填充） -->
+                <section id="postList" class="post-list" aria-label="文章列表">
+                    <!-- JS 会插入文章 -->
+                </section>
+
+                <!-- 文章详情（点击文章后显示） -->
+                <section id="postDetail" class="post-detail hidden" aria-live="polite">
+                    <button id="backToList" class="back-button">← 返回文章列表</button>
+                    <h2 id="detailTitle"></h2>
+                    <div id="detailMeta" class="post-meta"></div>
+                    <div id="detailContent" class="post-content"></div>
+
+                    <!-- 简单留言区（仅前端存储，不连接后端） -->
+                    <section class="comments">
+                        <h3>留言</h3>
+                        <form id="commentForm">
+                            <label>
+                                昵称
+                                <input type="text" id="commentName" required>
+                            </label>
+                            <label>
+                                内容
+                                <textarea id="commentText" rows="4" required></textarea>
+                            </label>
+                            <button type="submit">提交</button>
+                        </form>
+                        <ul id="commentList" class="comment-list"></ul>
+                    </section>
+                </section>
+            </div>
+
+            <!-- 右侧侧边栏 -->
+            <aside class="sidebar">
+                <section id="about" class="profile-card">
+                    <div class="profile-avatar">
+                        <img src="images/kakuyo.png" alt="叶萌头像">
+                    </div>
+                    <div class="profile-name">叶萌</div>
+                    <div class="profile-desc">欢迎来到叶萌的个人博客</div>
+
+                    <div class="profile-social">
+                        <!-- GitHub 图标 -->
+                        <button class="profile-icon-btn" id="githubBtn" aria-label="GitHub">
+                            <img src="images/github.png" alt="GitHub">
+                        </button>
+
+                        <!-- Gitee 图标 -->
+                        <button class="profile-icon-btn" id="giteeBtn" aria-label="Gitee">
+                            <img src="images/gitee.png" alt="Gitee">
+                        </button>
+
+                        <!-- 邮箱图标 -->
+                        <button class="profile-icon-btn" id="mailBtn" aria-label="邮箱">
+                            <img src="images/mail.png" alt="邮箱">
+                        </button>
+                    </div>
+                </section>
+
+                <section id="archive">
+                    <h2>归档</h2>
+                    <ul id="archiveList">
+                        <!-- JS 根据文章时间自动生成归档列表 -->
+                    </ul>
+                </section>
+
+                <section id="contact" class="contrib-card">
+                    <a href="https://github.com/kakuyo1" target="_blank" rel="noopener noreferrer">
+                        <img src="images/github-contrib.png" alt="kakuyo1 在 GitHub 上最近一年的贡献图">
+                    </a>
+                </section>
+
+            </aside>
+        </section>
+    </main>
+
+    <!-- 回到顶部按钮 -->
+    <button id="backToTop" class="back-to-top" aria-label="回到顶部">↑</button>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2025 个人博客 · 叶萌</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

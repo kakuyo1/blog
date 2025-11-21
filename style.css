@@ -1,0 +1,489 @@
+/* 基础设置 */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+
+    /* 使用整页背景图片 + 深色打底 */
+    background: #000000 url("images/background.jpg") no-repeat center center fixed;
+    background-size: cover;
+
+    color: #f5f5f5;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* 头部：半透明毛玻璃效果 */
+.site-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.86);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    color: #222222;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.main-nav a {
+    margin-left: 16px;
+    font-size: 14px;
+    color: #444444;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.main-nav a:hover {
+    color: #111111;
+    opacity: 0.8;
+}
+
+/* 顶部简介：深色渐变卡片，压住背景 */
+.hero {
+    margin-top: 16px;
+    padding: 24px 24px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.78),
+        rgba(0, 0, 0, 0.62)
+    );
+    color: #f5f5f5;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+}
+
+.hero h1 {
+    margin: 0 0 8px;
+    font-size: 26px;
+    font-weight: 600;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.hero p {
+    margin: 0;
+    color: #e0e0e0;
+}
+
+/* 布局：内容 + 侧边栏 */
+.blog-layout {
+    display: flex;
+    gap: 24px;
+    padding: 20px 0 32px;
+}
+
+.content {
+    flex: 2;
+    min-width: 0;
+}
+
+.sidebar {
+    flex: 1;
+    min-width: 0;
+}
+
+/* 通用卡片：文章 + 侧边栏块 */
+.post,
+.post-detail,
+.sidebar section {
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    color: #222222;
+}
+
+/* 工具栏：轻微圆角 + 半透明白 */
+.toolbar {
+    display: flex;
+    gap: 8px;
+    margin: 18px 0 20px;
+}
+
+.toolbar input[type="search"],
+.toolbar select {
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    padding: 8px 10px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 999px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    color: #222222;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.toolbar input[type="search"] {
+    flex: 1;
+}
+
+.toolbar input[type="search"]::placeholder {
+    color: #999999;
+}
+
+.toolbar input[type="search"]:focus,
+.toolbar select:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.18);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.52);
+}
+
+/* 文章列表 */
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.post {
+    padding: 14px 16px;
+}
+
+.post-title {
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.post-title-button {
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    color: #222222;
+}
+
+.post-title-button:hover {
+    text-decoration: underline;
+}
+
+.post-meta {
+    font-size: 12px;
+    color: #999999;
+    margin-bottom: 8px;
+}
+
+.post-excerpt {
+    margin: 0;
+    font-size: 14px;
+    color: #555555;
+}
+
+/* 文章详情 */
+.post-detail {
+    padding: 18px 18px 24px;
+}
+
+.post-detail h2 {
+    margin-top: 0;
+}
+
+.post-content p {
+    margin: 0 0 10px;
+    font-size: 15px;
+    color: #444444;
+}
+
+/* 返回列表按钮 & 表单按钮：统一按钮样式 */
+.back-button,
+#commentForm button {
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(244, 244, 244, 0.98));
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #333333;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+}
+
+.back-button {
+    margin-bottom: 12px;
+}
+
+.back-button:hover,
+#commentForm button:hover {
+    background: linear-gradient(135deg, #ffffff, #f2f2f2);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
+    opacity: 0.95;
+}
+
+/* 侧边栏块 */
+.sidebar section {
+    padding: 12px 14px;
+    margin-bottom: 16px;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #222222;
+}
+
+/* 归档列表 */
+#archiveList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#archiveList li {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+#archiveList button {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+    color: #444444;
+}
+
+#archiveList button:hover {
+    text-decoration: underline;
+}
+
+/* 留言区 */
+.comments {
+    margin-top: 24px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 16px;
+}
+
+.comments h3 {
+    margin-top: 0;
+    font-size: 16px;
+}
+
+#commentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+#commentForm label {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#commentForm input,
+#commentForm textarea {
+    border: 1px solid #dddddd;
+    padding: 6px 8px;
+    font-size: 14px;
+    border-radius: 6px;
+    resize: vertical;
+}
+
+/* 留言列表 */
+.comment-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.comment-item {
+    border-top: 1px solid #f5f5f5;
+    padding: 8px 0;
+    font-size: 14px;
+}
+
+.comment-item-header {
+    font-size: 12px;
+    color: #999999;
+    margin-bottom: 4px;
+}
+
+/* 底部：半透明白条 */
+.site-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 12px 0;
+    font-size: 12px;
+    color: #444444;
+    background: rgba(255, 255, 255, 0.9);
+    text-align: center;
+}
+
+.site-footer .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 回到顶部按钮：圆形悬浮按钮 */
+.back-to-top {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.96);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    display: none;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+}
+
+.back-to-top:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.45);
+    opacity: 0.95;
+}
+
+/* 工具类 */
+.hidden {
+    display: none;
+}
+
+/* 响应式：小屏幕下改为上下布局 */
+@media (max-width: 768px) {
+    .blog-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        order: -1;
+    }
+
+    .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 8px 0;
+        gap: 4px;
+    }
+
+    .main-nav a {
+        margin-left: 0;
+        margin-right: 12px;
+    }
+}
+
+/* 个人信息卡片 */
+.profile-card {
+    text-align: center;
+}
+
+.profile-avatar {
+    margin-bottom: 8px;
+}
+
+.profile-avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+.profile-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #222222;
+}
+
+.profile-desc {
+    font-size: 13px;
+    color: #777777;
+    margin-bottom: 12px;
+}
+
+.profile-social {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.profile-icon-btn {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.profile-icon-btn img {
+    width: 24px;
+    height: 24px;
+    display: block;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.profile-icon-btn:hover img {
+    opacity: 0.8;
+    transform: translateY(-1px);
+}
+
+/* GitHub 贡献图卡片：保持与侧栏卡片统一，只控制图片 */
+.contrib-card {
+    text-align: center;
+}
+
+.contrib-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* 一些统一的过渡效果 */
+.post,
+.post-detail,
+.sidebar section {
+    transition: box-shadow 0.2s ease, transform 0.15s ease, background 0.2s ease;
+}
+
+.post:hover,
+.sidebar section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.55);
+}
