@@ -117,7 +117,9 @@ document.addEventListener("DOMContentLoaded", () => {
         detailContentEl.innerHTML = post.content;
 
         // 调用 Prism.js 进行代码高亮
-        Prism.highlightAll();
+        setTimeout(() => {
+            Prism.highlightAllUnder(detailContentEl);
+        }, 50);
 
         // 切换显示
         postListEl.classList.add("hidden");
@@ -347,7 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-        /* ================== 点击烟花特效 ================== */
+    /* ================== 点击烟花特效 ================== */
     // 创建覆盖全屏的 canvas
     const fwCanvas = document.createElement("canvas");
     fwCanvas.id = "fireworksCanvas";

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
+<!-- head包含网站元数据和资源链接 -->
 <head>
     <meta charset="UTF-8">
     <title>个人博客</title>
@@ -16,11 +17,12 @@
     <!-- 如果需要高亮 C++ 代码 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-cpp.min.js"></script>
 
-
     <link rel="stylesheet" href="style.css">
 </head>
 
+<!-- body 包含网页的可见内容 -->
 <body>
+    <!-- 头部导航栏 -->
     <header class="site-header">
         <div class="container header-inner">
             <div class="logo">
@@ -28,6 +30,7 @@
                 个人博客
             </div>
             <nav class="main-nav">
+                <!-- main-nav 包含导航链接 -->
                 <a href="#home">
                     <img src="images/main.png" alt="首页" class="nav-icon">首页
                 </a>
@@ -43,7 +46,7 @@
             </nav>
         </div>
     </header>
-
+    <!-- site-main 包含网页的主要内容 -->
     <main class="site-main container" id="home">
         <!-- 顶部简介 -->
         <section class="hero">
@@ -51,6 +54,7 @@
             <p>这里是我的个人博客，用来记录学习日常。</p>
         </section>
 
+        <!-- blog-layout 包含博客的主要布局 -->
         <section class="blog-layout">
             <!-- 左侧内容区 -->
             <div class="content">
@@ -65,19 +69,19 @@
                     </select>
                 </div>
 
-                <!-- 文章列表（由 JS 填充） -->
+                <!-- 文章列表（由 JS 读取Json） -->
                 <section id="postList" class="post-list" aria-label="文章列表">
-                    <!-- JS 会插入文章 -->
+                    <!-- 暂时写死在Json中 -->
                 </section>
 
                 <!-- 文章详情（点击文章后显示） -->
                 <section id="postDetail" class="post-detail hidden" aria-live="polite">
                     <button id="backToList" class="back-button">← 返回文章列表</button>
-                    <h2 id="detailTitle"></h2>
-                    <div id="detailMeta" class="post-meta"></div>
+                    <h2 id="detailTitle"></h2> <!-- 文章标题 -->
+                    <div id="detailMeta" class="post-meta"></div> <!-- 文章元信息：日期、分类等 -->
                     <div id="detailContent" class="post-content"></div>
 
-                    <!-- 简单留言区（仅前端存储，不连接后端） -->
+                    <!-- 简单留言区（暂时仅前端展示，不连接后端存储） -->
                     <section class="comments">
                         <h3>留言</h3>
                         <form id="commentForm">
@@ -98,13 +102,14 @@
 
             <!-- 右侧侧边栏 -->
             <aside class="sidebar">
+                <!-- about 包含关于我的信息 -->
                 <section id="about" class="profile-card">
                     <div class="profile-avatar">
                         <img src="images/kakuyo.png" alt="叶萌头像">
                     </div>
                     <div class="profile-name">叶萌</div>
                     <div class="profile-desc">欢迎来到叶萌的个人博客</div>
-
+                    <!-- profile-social 包含社交媒体按钮 -->
                     <div class="profile-social">
                         <!-- GitHub 图标 -->
                         <button class="profile-icon-btn" id="githubBtn" aria-label="GitHub">
@@ -122,14 +127,14 @@
                         </button>
                     </div>
                 </section>
-
+                <!-- archive 包含归档列表 -->
                 <section id="archive">
                     <h2>归档</h2>
                     <ul id="archiveList">
                         <!-- JS 根据文章时间自动生成归档列表 -->
                     </ul>
                 </section>
-
+                <!-- contact 包含贡献图和github的跳转 -->
                 <section id="contact" class="contrib-card">
                     <a href="https://github.com/kakuyo1" target="_blank" rel="noopener noreferrer">
                         <img src="images/github-contrib.png" alt="kakuyo1 在 GitHub 上最近一年的贡献图">
