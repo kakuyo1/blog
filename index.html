@@ -5,36 +5,44 @@
     <meta charset="UTF-8">
     <title>个人博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- 添加网站图标 -->
     <link rel="icon" href="images/blog.png" type="image/png">
-    
+
+    <!-- Prism.js 样式 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <!-- Prism.js 脚本 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <!-- 如果需要高亮 C++ 代码 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-cpp.min.js"></script>
+
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<header class="site-header">
-    <div class="container header-inner">
-        <div class="logo">
-            <img src="images/blog.png" alt="博客图标" class="logo-icon">
-            个人博客
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <img src="images/blog.png" alt="博客图标" class="logo-icon">
+                个人博客
+            </div>
+            <nav class="main-nav">
+                <a href="#home">
+                    <img src="images/main.png" alt="首页" class="nav-icon">首页
+                </a>
+                <a href="#about">
+                    <img src="images/aboutus.png" alt="关于我" class="nav-icon">关于我
+                </a>
+                <a href="#archive">
+                    <img src="images/archive.png" alt="归档" class="nav-icon">归档
+                </a>
+                <a href="#contact">
+                    <img src="images/contact.png" alt="联系" class="nav-icon">联系
+                </a>
+            </nav>
         </div>
-        <nav class="main-nav">
-            <a href="#home">
-                <img src="images/main.png" alt="首页" class="nav-icon">首页
-            </a>
-            <a href="#about">
-                <img src="images/aboutus.png" alt="关于我" class="nav-icon">关于我
-            </a>
-            <a href="#archive">
-                <img src="images/archive.png" alt="归档" class="nav-icon">归档
-            </a>
-            <a href="#contact">
-                <img src="images/contact.png" alt="联系" class="nav-icon">联系
-            </a>
-        </nav>
-    </div>
-</header>
+    </header>
 
     <main class="site-main container" id="home">
         <!-- 顶部简介 -->

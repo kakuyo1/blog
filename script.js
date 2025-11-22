@@ -116,6 +116,9 @@ document.addEventListener("DOMContentLoaded", () => {
         detailMetaEl.textContent = `${post.date} · 分类：${post.categoryName}`;
         detailContentEl.innerHTML = post.content;
 
+        // 调用 Prism.js 进行代码高亮
+        Prism.highlightAll();
+
         // 切换显示
         postListEl.classList.add("hidden");
         postDetailEl.classList.remove("hidden");

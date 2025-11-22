@@ -1,38 +1,38 @@
 [
-    {
-        "id": 1,
-        "title": "相机标定与畸变去除",
-        "date": "2025-11-10",
-        "category": "tech",
-        "categoryName": "技术",
-        "excerpt": "内窥镜镜头标定过程能够提供相机内参和畸变系数，以便后续去畸变和图像处理。",
-        "content": "<h2>相机标定与畸变去除</h2><p>内窥镜的镜头通常为鱼眼镜头，标定过程能够提供相机内参和畸变系数，以便后续去畸变和图像处理。这个部分非常重要，因为鱼眼畸变会影响拼接的准确性。你提到的使用棋盘格进行标定是标准且有效的方法，OpenCV 的 <code>findChessboardCorners()</code> 和 <code>calibrateCamera()</code> 可以很好地完成这项任务。</p><h3>建议：</h3><ul><li><strong>标定图像数量：</strong>确保拍摄的棋盘格图像包含多角度和多位置的变化，以增加标定精度。</li><li><strong>精细化角点：</strong>使用 <code>cornerSubPix</code> 对角点进行精细化，以提高精度。</li><li><strong>鱼眼畸变模型：</strong>如果使用的是鱼眼镜头，建议使用 OpenCV 提供的 <code>cv::fisheye::calibrate</code> 方法，这会更适应畸变较大的内窥镜镜头。</li></ul>"
-    },
-    {
-        "id": 2,
-        "title": "图像配准",
-        "date": "2025-11-11",
-        "category": "tech",
-        "categoryName": "技术",
-        "excerpt": "配准是将多个视角的图像准确对齐。特征匹配方法可能会较为困难，通过外参可以更精确进行配准。",
-        "content": "<h2>图像配准</h2><p>配准是将多个视角的图像准确对齐。由于内窥镜图像间的重叠区域小且可能有倾斜，这可能使得特征匹配方法（如 SIFT、ORB）较为困难。为了解决这个问题，可以通过以下方法：</p><ul><li><strong>特征匹配方法：</strong>使用 SIFT、ORB 等方法时，可以结合 <strong>RANSAC 算法</strong> 来过滤掉错误匹配，提高配准的鲁棒性。</li><li><strong>外参的使用：</strong>通过相机标定获得的旋转向量和位移向量可以用于初步估计每张图像的空间位置，并进行配准。这比单纯依赖特征匹配要精确得多。</li></ul>"
-    },
-    {
-        "id": 3,
-        "title": "投影与去畸变",
-        "date": "2025-11-12",
-        "category": "tech",
-        "categoryName": "技术",
-        "excerpt": "针对鱼眼镜头，图像的去畸变和投影是拼接的重要步骤。球面投影可以展现360°图像。",
-        "content": "<h2>投影与去畸变</h2><p>针对鱼眼镜头，图像的去畸变和投影是拼接的重要步骤。你提到的球面投影是非常合适的，因为内窥镜通常具有广角视野，球面投影可以更自然地展现360°图像。OpenCV 中的 <code>cv::fisheye::undistortImage</code> 和 <code>cv::warpPerspective</code> 方法可以很好地处理这个问题。</p><h3>建议：</h3><ul><li><strong>鱼眼镜头模型：</strong>使用 <code>fisheye::undistortImage</code> 对畸变图像进行预处理。</li><li><strong>球面投影：</strong>通过 <strong>球面投影</strong> 或 <strong>透视投影</strong> 将图像展开，以便它们可以更好地拼接。</li></ul>"
-    },
-    {
-        "id": 4,
-        "title": "图像融合",
-        "date": "2025-11-13",
-        "category": "tech",
-        "categoryName": "技术",
-        "excerpt": "拼接后的图像可能会有接缝，图像融合是必须的，OpenCV 提供的 <code>MultiBandBlender</code> 可以解决这个问题。",
-        "content": "<h2>图像融合</h2><p>拼接后的图像通常会有接缝，尤其是当重叠区域较小或者相机的光照不均时，可能会出现明显的接缝或亮带。为此，图像融合是必须的。OpenCV 提供的 <code>cv::detail::MultiBandBlender</code> 是一种优秀的图像融合方法，它能够平滑图像接缝，使得拼接后的图像看起来更自然。</p><h3>建议：</h3><ul><li><strong>使用多波段融合：</strong><code>MultiBandBlender</code> 采用多层次融合，能够在不同频率层次上平滑图像接缝，特别适用于大范围的图像拼接。</li><li><strong>颜色匹配：</strong>如果光照差异较大，考虑使用 <strong>图像颜色校正</strong> 方法来调整不同图像之间的颜色一致性。</li></ul>"
-    }
+  {
+    "id": 1,
+    "title": "相机标定与畸变去除",
+    "date": "2025-11-10",
+    "category": "tech",
+    "categoryName": "技术",
+    "excerpt": "内窥镜镜头标定过程能够提供相机内参和畸变系数，以便后续去畸变和图像处理。",
+    "content": "<h2>相机标定与畸变去除</h2><p>内窥镜的镜头通常为鱼眼镜头，标定过程能够提供相机内参和畸变系数，以便后续去畸变和图像处理。这个部分非常重要，因为鱼眼畸变会影响拼接的准确性。你提到的使用棋盘格进行标定是标准且有效的方法，OpenCV 的 <code>findChessboardCorners()</code> 和 <code>calibrateCamera()</code> 可以很好地完成这项任务。</p><h3>建议：</h3><ul><li><strong>标定图像数量：</strong>确保拍摄的棋盘格图像包含多角度和多位置的变化，以增加标定精度。</li><li><strong>精细化角点：</strong>使用 <code>cornerSubPix</code> 对角点进行精细化，以提高精度。</li><li><strong>鱼眼畸变模型：</strong>如果使用的是鱼眼镜头，建议使用 OpenCV 提供的 <code>cv::fisheye::calibrate</code> 方法，这会更适应畸变较大的内窥镜镜头。</li></ul><h3>代码示例：</h3><pre><code class=\"language-cpp\">int main() {\n\tSize boardSize(11, 8); // Number of inner corners per chessboard row and column\n\tfloat squareSize = 6.f; // Size of a square in your defined unit (meters)\n\n\t// Prepare object points\n\tvector<vector<Point3f>> objectPoints;\n\tvector<vector<Point2f>> imagePoints;\n\t// 世界坐标系中的点\n\tvector<Point3f> obj;\n\tfor (int i = 0; i &lt; boardSize.height; i++) {\n\t\tfor (int j = 0; j &lt; boardSize.width; j++) {\n\t\t\tobj.push_back(Point3f(j * squareSize, i * squareSize, 0));\n\t\t}\n\t}\n\t// 读取图片\n\tvector&lt;String&gt; images;\n\tglob(\"B:\\OpenCV\\images\\chessboard-iphone\\*.jpg\", images);\n\tMat gray;\n\tvector&lt;Point2f&gt; corners;\n\tfor (size_t i = 0; i &lt; images.size(); i++) {\n\t\tMat img = imread(images[i], 1);\n\t\tcvtColor(img, gray, COLOR_BGR2GRAY);\n\t\tbool found = findChessboardCorners(gray, boardSize, corners,\n\t\t\tCALIB_CB_ADAPTIVE_THRESH | CALIB_CB_FAST_CHECK | CALIB_CB_NORMALIZE_IMAGE);\n\t\tif (found) {\n\t\t\tcornerSubPix(gray, corners, Size(11, 11), Size(-1, -1),\n\t\t\t\tTermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 30, 0.1));\n\t\t\timagePoints.push_back(corners);\n\t\t\tobjectPoints.push_back(obj);\n\t\t\tMat show = img.clone();\n\n\t\t\tdrawChessboardCorners(img, boardSize, corners, found);\n\t\t\timshow(\"Chessboard\", img);\n\t\t\twaitKey(500);\n\t\t}\n\t}\n\n\t// 相机标定\n\tMat cameraMatrix, distCoeffs;\n\tvector&lt;Mat&gt; rvecs, tvecs;\n\tdouble error = calibrateCamera(objectPoints, imagePoints, gray.size(), cameraMatrix, distCoeffs, rvecs, tvecs);\n\n\tcout << \"error:\" << error &lt;&lt; endl;\n\tcout << \"cameraMatrix:\" << cameraMatrix &lt;&lt; endl;\n\tcout << \"distCoeffs:\" << distCoeffs &lt;&lt; endl;\n\n\treturn 0;;\n}</code></pre>"
+  },
+  {
+    "id": 2,
+    "title": "图像配准",
+    "date": "2025-11-11",
+    "category": "tech",
+    "categoryName": "技术",
+    "excerpt": "配准是将多个视角的图像准确对齐。特征匹配方法可能会较为困难，通过外参可以更精确进行配准。",
+    "content": "<h2>图像配准</h2><p>配准是将多个视角的图像准确对齐。由于内窥镜图像间的重叠区域小且可能有倾斜，这可能使得特征匹配方法（如 SIFT、ORB）较为困难。为了解决这个问题，可以通过以下方法：</p><ul><li><strong>特征匹配方法：</strong>使用 SIFT、ORB 等方法时，可以结合 <strong>RANSAC 算法</strong> 来过滤掉错误匹配，提高配准的鲁棒性。</li><li><strong>外参的使用：</strong>通过相机标定获得的旋转向量和位移向量可以用于初步估计每张图像的空间位置，并进行配准。这比单纯依赖特征匹配要精确得多。</li></ul>"
+  },
+  {
+    "id": 3,
+    "title": "投影与去畸变",
+    "date": "2025-11-12",
+    "category": "tech",
+    "categoryName": "技术",
+    "excerpt": "针对鱼眼镜头，图像的去畸变和投影是拼接的重要步骤。球面投影可以展现360°图像。",
+    "content": "<h2>投影与去畸变</h2><p>针对鱼眼镜头，图像的去畸变和投影是拼接的重要步骤。你提到的球面投影是非常合适的，因为内窥镜通常具有广角视野，球面投影可以更自然地展现360°图像。OpenCV 中的 <code>cv::fisheye::undistortImage</code> 和 <code>cv::warpPerspective</code> 方法可以很好地处理这个问题。</p><h3>建议：</h3><ul><li><strong>鱼眼镜头模型：</strong>使用 <code>fisheye::undistortImage</code> 对畸变图像进行预处理。</li><li><strong>球面投影：</strong>通过 <strong>球面投影</strong> 或 <strong>透视投影</strong> 将图像展开，以便它们可以更好地拼接。</li></ul>"
+  },
+  {
+    "id": 4,
+    "title": "图像融合",
+    "date": "2025-11-13",
+    "category": "tech",
+    "categoryName": "技术",
+    "excerpt": "拼接后的图像可能会有接缝，图像融合是必须的，OpenCV 提供的 <code>MultiBandBlender</code> 可以解决这个问题。",
+    "content": "<h2>图像融合</h2><p>拼接后的图像通常会有接缝，尤其是当重叠区域较小或者相机的光照不均时，可能会出现明显的接缝或亮带。为此，图像融合是必须的。OpenCV 提供的 <code>cv::detail::MultiBandBlender</code> 是一种优秀的图像融合方法，它能够平滑图像接缝，使得拼接后的图像看起来更自然。</p><h3>建议：</h3><ul><li><strong>使用多波段融合：</strong><code>MultiBandBlender</code> 采用多层次融合，能够在不同频率层次上平滑图像接缝，特别适用于大范围的图像拼接。</li><li><strong>颜色匹配：</strong>如果光照差异较大，考虑使用 <strong>图像颜色校正</strong> 方法来调整不同图像之间的颜色一致性。</li></ul>"
+  }
 ]
