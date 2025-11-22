@@ -1,10 +1,11 @@
-/* 基础设置 */
+/* 基础设置: 全局 box-sizing */
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+    box-sizing: border-box; /* 包括 padding 和 border 在内计算元素宽高 */
 }
 
+/* 全局设置 (body) */
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
@@ -12,61 +13,67 @@ body {
 
     /* 使用整页背景图片 + 深色打底 */
     background: #000000 url("images/background.jpg") no-repeat center center fixed;
-    background-size: cover;
+    background-size: cover; /* 背景图片覆盖整个页面, 保持比例 */
 
     color: #f5f5f5;
-    line-height: 1.6;
+    line-height: 1.6; /* 增加行高提升可读性 */
 }
 
+/* 链接设置 */
 a {
-    color: inherit;
-    text-decoration: none;
+    color: inherit; /* 继承父元素颜色 */
+    text-decoration: none; /* 默认无下划线 */
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* 鼠标悬停时显示下划线 */
 }
 
+/* 图片设置：响应式，防止溢出 */
 img {
-    max-width: 100%;
-    display: block;
+    max-width: 100%; /* 图片最大宽度不超过容器宽度 */
+    display: block; /* 将图片的显示方式设置为块级元素，这样它就会自动换行，并占据一行的宽度。 */
 }
 
+/* 容器：统一内容宽度，居中 */
 .container {
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 0 auto; /* 上下外边距为 0, auto 水平居中 */
     padding: 0 16px;
 }
 
-/* 头部：半透明毛玻璃效果 */
+/* 头部导航栏：半透明毛玻璃效果 */
 .site-header {
     border-bottom: 1px solid rgba(255, 255, 255, 0.35);
     background: rgba(255, 255, 255, 0.86);
-    backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px); /* 毛玻璃模糊效果 */
     -webkit-backdrop-filter: blur(14px);
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    position: sticky; /* 粘性定位，滚动时固定在顶部 */
+    top: 0; /* 距离顶部 0 */
+    z-index: 10; /* 确保在其他内容之上 */
     color: #222222;
 }
 
+/* 头部内部布局：Flexbox */
 .header-inner {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: center; /* 垂直居中对齐子元素。*/
+    justify-content: space-between; /* 子元素之间的水平间隔最大化，使左右两边的元素紧贴容器的两侧。*/
     height: 56px;
 }
 
+/* Logo 样式 */
 .logo {
     font-size: 18px;
     font-weight: 600;
 }
 
+/* 导航栏链接样式 */
 .main-nav a {
     margin-left: 16px;
     font-size: 14px;
     color: #444444;
-    transition: color 0.2s ease, opacity 0.2s ease;
+    transition: color 0.2s ease, opacity 0.2s ease; /* 给链接设置平滑的过渡效果，当鼠标悬停时，颜色和透明度变化的过渡时间为 0.2 秒。*/
 }
 
 .main-nav a:hover {
@@ -74,7 +81,7 @@ img {
     opacity: 0.8;
 }
 
-/* 顶部简介：深色渐变卡片，压住背景 */
+/* 首屏横幅：深色渐变卡片，压住背景 */
 .hero {
     margin-top: 16px;
     padding: 24px 24px 20px;
@@ -86,7 +93,7 @@ img {
         rgba(0, 0, 0, 0.62)
     );
     color: #f5f5f5;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55); /* 添加阴影，使其更具立体感 */
 }
 
 .hero h1 {
@@ -104,10 +111,11 @@ img {
 /* 布局：内容 + 侧边栏 */
 .blog-layout {
     display: flex;
-    gap: 24px;
+    gap: 24px; /* 设置子元素（如文章内容区和侧边栏）之间的间隔 */
     padding: 20px 0 32px;
 }
 
+/* content和side-bar 比例为2 ：1 */
 .content {
     flex: 2;
     min-width: 0;
@@ -123,13 +131,13 @@ img {
 .post-detail,
 .sidebar section {
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.82);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.7); /* 为每个卡片添加一个透明度为 0.7 的白色边框，增加卡片的层次感。*/
+    background: rgba(255, 255, 255, 0.82); /* 设置卡片的背景色为半透明白色，背景颜色略带透明感。*/
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45); /* 为卡片添加阴影效果，使得卡片具有浮动感。*/
     color: #222222;
 }
 
-/* 工具栏：轻微圆角 + 半透明白 */
+/* 工具栏(搜索 + 下拉列表)：轻微圆角 + 半透明白 */
 .toolbar {
     display: flex;
     gap: 8px;
@@ -149,7 +157,7 @@ img {
 }
 
 .toolbar input[type="search"] {
-    flex: 1;
+    flex: 1; /* 尽可能占比大 */
 }
 
 .toolbar input[type="search"]::placeholder {
@@ -166,8 +174,8 @@ img {
 /* 文章列表 */
 .post-list {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    flex-direction: column; /* 将 Flexbox 布局设置为垂直方向，即文章列表中的每个文章项会依次排列在列中。*/
+    gap: 16px; /* 为每个文章项设置 16px 的间隙 */
 }
 
 .post {
@@ -179,28 +187,28 @@ img {
     font-size: 18px;
 }
 
-.post-title-button {
-    display: inline-block;
+.post-title-button { /* 文章标题按钮 */
+    display: inline-block; /* 设置标题按钮为内联块元素，使其与其他元素排列在同一行。*/
     padding: 0;
     border: none;
     background: none;
     font: inherit;
     text-align: left;
-    cursor: pointer;
+    cursor: pointer; /* 当鼠标悬停在按钮上时，显示手形光标，提示按钮是可点击的。*/
     color: #222222;
 }
 
-.post-title-button:hover {
+.post-title-button:hover { 
     text-decoration: underline;
 }
 
-.post-meta {
+.post-meta { /* 文章元信息 */
     font-size: 12px;
     color: #999999;
     margin-bottom: 8px;
 }
 
-.post-excerpt {
+.post-excerpt { /* 文章摘要 */
     margin: 0;
     font-size: 14px;
     color: #555555;
@@ -224,15 +232,15 @@ img {
 /* 返回列表按钮 & 表单按钮：统一按钮样式 */
 .back-button,
 #commentForm button {
-    border-radius: 999px;
+    border-radius: 999px; /* 设置按钮为圆形，增强视觉效果。*/
     border: 1px solid rgba(0, 0, 0, 0.1);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(244, 244, 244, 0.98));
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(244, 244, 244, 0.98)); /* 从白色过渡到浅灰色。*/
     padding: 6px 14px;
     font-size: 13px;
     cursor: pointer;
     color: #333333;
     box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, opacity 0.15s ease; /* 为按钮添加平滑的过渡效果，鼠标悬停时产生效果。*/
 }
 
 .back-button {
@@ -242,7 +250,7 @@ img {
 .back-button:hover,
 #commentForm button:hover {
     background: linear-gradient(135deg, #ffffff, #f2f2f2);
-    transform: translateY(-1px);
+    transform: translateY(-1px); /* Y上平移1px */
     box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
     opacity: 0.95;
 }
@@ -261,12 +269,12 @@ img {
 
 /* 归档列表 */
 #archiveList {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    list-style: none; /* 去除列表项的默认样式，取消前面的点或数字。*/
+    margin: 0; /* 去除归档列表的外边距。*/
+    padding: 0; /* 去除归档列表的内边距。*/
 }
 
-#archiveList li {
+#archiveList li { /* 归档列表项 */
     font-size: 14px;
     margin-bottom: 4px;
 }
@@ -358,7 +366,7 @@ img {
 
 /* 回到顶部按钮：圆形悬浮按钮 */
 .back-to-top {
-    position: fixed;
+    position: fixed; /* 使回到顶部按钮固定在页面右下角，即使页面滚动也始终可见。*/
     right: 16px;
     bottom: 16px;
     border: 1px solid rgba(0, 0, 0, 0.15);
@@ -381,22 +389,22 @@ img {
     opacity: 0.95;
 }
 
-/* 工具类 */
+/* 工具类，用于隐藏post */
 .hidden {
     display: none;
 }
 
-/* 响应式：小屏幕下改为上下布局 */
+/* 响应式：设置在屏幕宽度小于或等于 768px 时应用的样式，用于小屏设备（如手机）的响应式设计。 */
 @media (max-width: 768px) {
     .blog-layout {
         flex-direction: column;
     }
 
     .sidebar {
-        order: -1;
+        order: -1; /* 调整侧边栏的位置，使其出现在内容下方 */
     }
 
-    .header-inner {
+    .header-inner { /* 调整头部导航栏的布局，改为垂直排列，并设置合理的内边距和间隔。*/
         flex-direction: column;
         align-items: flex-start;
         height: auto;
@@ -404,7 +412,7 @@ img {
         gap: 4px;
     }
 
-    .main-nav a {
+    .main-nav a { /* 调整导航链接的间距，使其在小屏设备上更紧凑 */
         margin-left: 0;
         margin-right: 12px;
     }
@@ -423,7 +431,7 @@ img {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    object-fit: cover;
+    object-fit: cover; /* 确保图片保持其长宽比，并且不会失真，如果图片的尺寸和容器的尺寸不一致，则会裁剪图片的多余部分，填充整个容器。*/
     margin: 0 auto;
 }
 
@@ -471,7 +479,7 @@ img {
 }
 
 .contrib-card img {
-    display: block;
+    display: block; /* 设置图片为块级元素。*/
     width: 100%;
     height: auto;
 }
@@ -489,7 +497,7 @@ img {
     box-shadow: 0 22px 50px rgba(0, 0, 0, 0.55);
 }
 
-/* 图标样式 */
+/* 导航栏图标样式 */
 .nav-icon {
     width: 18px;           /* 调整图标的大小 */
     height: 18px;
@@ -525,7 +533,7 @@ img {
     font-weight: 600;
 }
 
-/* 调整图标的大小和位置 */
+/* 网站logo */
 .logo-icon {
     width: 48px;         /* 图标大小 */
     height: 48px;

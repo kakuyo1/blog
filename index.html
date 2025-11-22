@@ -5,9 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <title>个人博客</title>
+    <!-- 响应式设计视口设置, 以适应不同设备屏幕宽度 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- 添加网站图标 -->
+    <meta name="author" content="叶萌">
+    <meta name="description" content="叶萌的个人博客，记录学习日常">
+
+    <!-- 添加网站图标, 浏览器标签上会显示该图标 -->
     <link rel="icon" href="images/blog.png" type="image/png">
 
     <!-- Prism.js 样式 -->
@@ -20,17 +24,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<!-- body 包含网页的可见内容 -->
+<!-- body 包含网页主体结构 -->
 <body>
     <!-- 头部导航栏 -->
     <header class="site-header">
-        <div class="container header-inner">
+        <!-- container 用于统一内容宽度 -->
+        <div class="container header-inner"> <!-- 该div同时作为容器container和头部内部header-inner布局 -->
             <div class="logo">
                 <img src="images/blog.png" alt="博客图标" class="logo-icon">
                 个人博客
             </div>
+            <!-- nav明确导航区域：可以帮助屏幕阅读器用户更好地理解页面结构 -->
             <nav class="main-nav">
-                <!-- main-nav 包含导航链接 -->
+                <!-- main-nav 包含导航链接（仅仅只是页面内锚点链接Anchor，暂时没有页面跳转-超链接） -->
                 <a href="#home">
                     <img src="images/main.png" alt="首页" class="nav-icon">首页
                 </a>
@@ -48,7 +54,7 @@
     </header>
     <!-- site-main 包含网页的主要内容 -->
     <main class="site-main container" id="home">
-        <!-- 顶部简介 -->
+        <!-- 首屏横幅-主视觉区域 -->
         <section class="hero">
             <h1>你好，我是叶萌</h1>
             <p>这里是我的个人博客，用来记录学习日常。</p>
@@ -60,7 +66,10 @@
             <div class="content">
                 <!-- 工具栏：搜索 + 分类筛选 -->
                 <div class="toolbar">
+                    <!-- 搜索框 -->
+                    <!-- aria-label 用于屏幕阅读器识别元素(button)的用途，特别是在元素本身没有足够文本内容的情况下。-->
                     <input type="search" id="searchInput" placeholder="搜索文章标题或内容..." aria-label="搜索文章">
+                    <!-- 分类筛选下拉菜单 -->
                     <select id="categoryFilter" aria-label="按分类筛选文章">
                         <option value="all">全部分类</option>
                         <option value="tech">技术</option>
@@ -74,7 +83,7 @@
                     <!-- 暂时写死在Json中 -->
                 </section>
 
-                <!-- 文章详情（点击文章后显示） -->
+                <!-- 文章详情（默认隐藏，点击后才会显示） -->
                 <section id="postDetail" class="post-detail hidden" aria-live="polite">
                     <button id="backToList" class="back-button">← 返回文章列表</button>
                     <h2 id="detailTitle"></h2> <!-- 文章标题 -->
@@ -87,11 +96,11 @@
                         <form id="commentForm">
                             <label>
                                 昵称
-                                <input type="text" id="commentName" required>
+                                <input type="text" id="commentName" required> <!-- 必填项  -->
                             </label>
                             <label>
                                 内容
-                                <textarea id="commentText" rows="4" required></textarea>
+                                <textarea id="commentText" rows="4" required></textarea> <!-- 必填项  -->
                             </label>
                             <button type="submit">提交</button>
                         </form>
@@ -111,6 +120,7 @@
                     <div class="profile-desc">欢迎来到叶萌的个人博客</div>
                     <!-- profile-social 包含社交媒体按钮 -->
                     <div class="profile-social">
+                        <!-- 每个按钮设置唯一标识符，供 JavaScript 使用来跳转网页。-->
                         <!-- GitHub 图标 -->
                         <button class="profile-icon-btn" id="githubBtn" aria-label="GitHub">
                             <img src="images/github.png" alt="GitHub">
@@ -134,7 +144,7 @@
                         <!-- JS 根据文章时间自动生成归档列表 -->
                     </ul>
                 </section>
-                <!-- contact 包含贡献图和github的跳转 -->
+                <!-- contact 包含贡献图和github的超链接跳转(_blank新标签页中) -->
                 <section id="contact" class="contrib-card">
                     <a href="https://github.com/kakuyo1" target="_blank" rel="noopener noreferrer">
                         <img src="images/github-contrib.png" alt="kakuyo1 在 GitHub 上最近一年的贡献图">
